@@ -10,12 +10,12 @@ import android.widget.Button;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    Button button1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        View button = findViewById(R.id.button1);
+        Button button = findViewById(R.id.button1);
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -26,8 +26,8 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
     public void onClickStart(View v) {
-        startService(new Intent(this, My_service2.class).putExtra("time", 7));
-        startService(new Intent(this, My_service2.class).putExtra("time", 2));
-        startService(new Intent(this, My_service2.class).putExtra("time", 4));
+        startService(new Intent(this, MyService2.class).putExtra("time", 7));
+        startService(new Intent(this, MyService2.class).putExtra("time", 2));
+        startService(new Intent(this, MyService2.class).putExtra("time", 4));
     }
 }

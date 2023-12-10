@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-public abstract class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
    Button button, btnStart, btnStop;
 
     final String LOG_TAG="myLogs";
@@ -23,11 +23,11 @@ public abstract class MainActivity extends AppCompatActivity implements View.OnC
 
 
     public void onClickStart(View view) {
-        startService(new Intent(this, My_Service.class));
+        startService(new Intent(this, MyService.class));
     }
 
     public void onClickStop(View view) {
-        stopService(new Intent(this, My_Service.class));
+        stopService(new Intent(this, MyService.class));
     }
 
     public void sled(View view) {

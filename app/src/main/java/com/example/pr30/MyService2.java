@@ -5,21 +5,24 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class My_service2 extends Service {
+public class MyService2 extends Service {
+
     final String LOG_TAG = "myLogs";
     ExecutorService es;
+    //объект,который будет получать задачи и выводить их по очереди в потоке
     Object someRes;
 
     public void onCreate() {
+       /*super.onCreate();
+        Log.d(LOG_TAG, "MyService onCreate");
+        es = Executors.newFixedThreadPool(1);
+        someRes = new Object()*/;
         super.onCreate();
         Log.d(LOG_TAG, "MyService onCreate");
-        //es = Executors.newFixedThreadPool(1);
         es = Executors.newFixedThreadPool(3);
         someRes = new Object();
     }
@@ -30,12 +33,6 @@ public class My_service2 extends Service {
         someRes = null;
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOG_TAG, "MyService onStartCommand");
         int time = intent.getIntExtra("time", 1);
@@ -44,7 +41,9 @@ public class My_service2 extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-
+    public IBinder onBind(Intent arg0) {
+        return null;
+    }
 
     class MyRun implements Runnable {
 
@@ -73,6 +72,8 @@ public class My_service2 extends Service {
         }
 
         void stop() {
+            //Log.d(LOG_TAG, "MyRun#" + startId + " end, stopSelf(" + startId + ")");
+            //stopSelf(startId);
             Log.d(LOG_TAG, "MyRun#" + startId + " end, stopSelfResult("
                     + startId + ") = " + stopSelfResult(startId));
         }
